@@ -8,7 +8,8 @@ import PostPreview from '@/components/post/PostPreview.astro'
 
 import { Icon } from 'astro-icon/components'
 import { getAllPosts, sortMDByDate } from '@/utils'
-import { NAME, ABOUT, POST, EXPERIENCE, SKILL } from '@/consts'
+import { NAME, ABOUT, POST, CATEGORY, TAG } from '@/consts'
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
 
 const languages = ['lorem', 'ipsum']
 const frontend = ['lorem', 'ipsum', 'lorem', 'ipsum', 'lorem', 'ipsum', 'lorem']
@@ -63,7 +64,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			)
 		}
 
-		<Section title={EXPERIENCE}>
+		<Section title={CATEGORY}>
 			<Card heading='程序员' subheading='搬砖' date='2014 - 2024'>
 				<ul class='ml-4 list-disc text-muted-foreground'>
 					<li>努力写bug中...</li>
@@ -71,7 +72,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			</Card>
 		</Section>
 
-		<Section title={SKILL}>
+		<Section title={TAG}>
 			<SkillLayout title='语言' skills={languages} />
 			<SkillLayout title='前端' skills={frontend} />
 			<SkillLayout title='后端' skills={backend} />

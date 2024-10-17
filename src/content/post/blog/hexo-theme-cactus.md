@@ -1,7 +1,7 @@
 ---
 title: Hexo主题cactus的改修
-description: "This post is for testing the draft post functionality"
-publishDate: "2024/10/14"
+description: "Hexo在使用cactus时，自定义其字体"
+publishDate: "2024/10/3"
 tags: ["hexo-theme"]
 ---
 

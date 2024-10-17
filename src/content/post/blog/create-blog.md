@@ -1,7 +1,7 @@
 ---
 title: 博客的创建
-description: "This post is for testing the draft post functionality。"
-publishDate: "2024/10/14"
+description: "初创博客的心得记录"
+publishDate: "2024/10/2"
 tags: ["blog"]
 ---
 

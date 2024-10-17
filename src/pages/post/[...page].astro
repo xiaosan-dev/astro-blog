@@ -27,19 +27,19 @@ const { page, uniqueTags } = Astro.props
 
 const meta = {
 	description: 'Posts',
-	title: 'Blog'
+	title: 'Post'
 }
 
 const paginationProps = {
 	...(page.url.prev && {
 		prevUrl: {
-			text: `← Previous Posts`,
+			text: `← 上一篇`,
 			url: page.url.prev
 		}
 	}),
 	...(page.url.next && {
 		nextUrl: {
-			text: `Next Posts →`,
+			text: `下一篇 →`,
 			url: page.url.next
 		}
 	})

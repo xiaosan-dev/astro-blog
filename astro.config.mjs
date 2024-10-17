@@ -25,7 +25,9 @@ export default defineConfig({
 		icon()
   ],
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+	imageService: 'passthrough',
+  }),
   markdown: {
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
 		rehypePlugins: [
@@ -44,8 +46,4 @@ export default defineConfig({
 		}
 	},
 	prefetch: true,
-	output: 'server',
-	adapter: vercel({
-		webAnalytics: { enabled: true }
-	})
 });
