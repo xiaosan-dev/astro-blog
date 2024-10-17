@@ -30,7 +30,7 @@ export const menuLinks: Array<{ title: string; path: string }> = [
 	},
 	{
 		title: '博客',
-		path: '/blog/'
+		path: '/post/'
 	}
 ]
 

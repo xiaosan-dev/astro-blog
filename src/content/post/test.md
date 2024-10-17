@@ -1,9 +1,11 @@
 ---
-title: "A post of Markdown elements"
-description: "This post is for testing and listing a number of different markdown elements"
-publishDate: "22 Feb 2023"
-updatedDate: 22 Jan 2024
+title: "Markdown Testing"
+description: "This post is for testing different markdown elements"
+publishDate: "2024/10/14"
+updatedDate: 2024/10/17
 tags: ["test", "markdown"]
+ogImage: "/social-card.png"
+draft: true
 ---
 
 ## This is a H2 Heading
@@ -152,9 +154,9 @@ Right aligned columns
 
 ## Images
 
-Image in the same folder: `src/content/post/markdown-elements/logo.png`
+Image in the same folder: `src/content/post/cover-image/cover.png`
 
-![Astro theme cactus logo](logo.png)
+<!-- ![Astro theme cactus logo](logo.png) -->
 
 ## Links
 
