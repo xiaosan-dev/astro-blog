@@ -10,8 +10,6 @@ import { expressiveCodeOptions } from './src/site.config'
 import icon from 'astro-icon'
 import cloudflare from '@astrojs/cloudflare';
 
-import vercel from '@astrojs/vercel/serverless'
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',

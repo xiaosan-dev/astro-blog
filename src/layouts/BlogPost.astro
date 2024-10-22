@@ -26,7 +26,7 @@ const { headings } = await post.render()
 <PageLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
 	<div class='w-full'>
 		<Button title='返回' href='/post' style='button'>
-			<Icon width={14} height={14} slot='icon-before' name='mingcute:arrow-left-line' />
+			<Icon width={14} height={14} slot='icon-before' name='arrow-left-line' />
 		</Button>
 		<div class='mt-8 gap-x-10 lg:flex lg:items-start'>
 			{!!headings.length && <TOC headings={headings} />}
@@ -45,7 +45,7 @@ const { headings } = await post.render()
 				data-show='false'
 				id='to-top-btn'
 			>
-				<Icon name='mingcute:arrow-to-up-line' />
+				<Icon name='arrow-to-up-line' />
 			</button>
 		</div>
 	</div>

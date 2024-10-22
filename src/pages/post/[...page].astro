@@ -25,11 +25,6 @@ interface Props {
 
 const { page, uniqueTags } = Astro.props
 
-const meta = {
-	description: 'Posts',
-	title: 'Post'
-}
-
 const paginationProps = {
 	...(page.url.prev && {
 		prevUrl: {
@@ -46,10 +41,10 @@ const paginationProps = {
 }
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={{ title: '文章' }}>
 	<div class='w-full'>
 		<Button title='返回' href='/' style='button'>
-			<Icon width='14' height='14' slot='icon-before' name='mingcute:arrow-left-line' />
+			<Icon width='14' height='14' slot='icon-before' name='arrow-left-line' />
 		</Button>
 
 		<h1 class='mb-6 mt-5 text-2xl font-bold'>文章</h1>
@@ -69,8 +64,8 @@ const paginationProps = {
 					{!!uniqueTags.length && (
 						<aside>
 							<h2 class='mb-4 flex items-center text-lg font-semibold'>
-								<Icon width={20} height={20} name='mingcute:tag-2-line' />
-								Tags
+								<Icon width={20} height={20} name='tag' />
+								标签
 							</h2>
 							<ul class='text-bgColor flex flex-wrap gap-2'>
 								{uniqueTags.map((tag) => (
