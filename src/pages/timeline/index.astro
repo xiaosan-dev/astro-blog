@@ -1,0 +1,137 @@
+
+---
+import PageLayout from '@/layouts/BaseLayout.astro'
+import ToolSection from '@/components/ToolSection.astro'
+import Button from '@/components/Button.astro'
+import { Icon } from 'astro-icon/components'
+import { getAllPosts } from '@/utils'
+import { getPostUrlBySlug } from 'src/utils/post'
+import { formatDate } from 'src/utils/date'
+
+interface Props {
+  keyword?: string
+  tags?: string[]
+  categories?: string[]
+}
+const { keyword, tags, categories } = Astro.props
+
+let posts = await getAllPosts()
+
+if (Array.isArray(tags) && tags.length > 0) {
+  posts = posts.filter(
+    post =>
+      Array.isArray(post.data.tags) &&
+      post.data.tags.some(tag => tags.includes(tag)),
+  )
+}
+
+
+const groups: { year: number; posts: typeof posts }[] = (() => {
+  const groupedPosts = posts.reduce(
+    (grouped: { [year: number]: typeof posts }, post) => {
+      const year = post.data.publishDate.getFullYear()
+      if (!grouped[year]) {
+        grouped[year] = []
+      }
+      grouped[year].push(post)
+      return grouped
+    },
+    {},
+  )
+
+	for (const year in groupedPosts) {
+		groupedPosts[year].sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+	}
+
+  // convert the object to an array
+  const groupedPostsArray = Object.keys(groupedPosts).map(key => ({
+    year: Number.parseInt(key),
+    posts: groupedPosts[Number.parseInt(key)],
+  }))
+
+  // sort years by latest first
+  groupedPostsArray.sort((a, b) => b.year - a.year)
+  return groupedPostsArray
+})()
+
+function formatTag(tag: string[]) {
+  return tag.map(t => `#${t}`).join(' ')
+}
+---
+
+<PageLayout meta={{ title: '时间线' }}>
+  <!-- <div class="px-8 py-6 w-full"> -->
+    <div class='w-full'>
+		<Button title='Back' href='/' style='button'>
+			<Icon width='14' height='14' slot='icon-before' name='arrow-left-line' />
+		</Button>
+
+		<div class='mt-5 flex w-full flex-col gap-y-10'>
+			<div>
+				<h1 class='mb-1 text-2xl font-bold'>时间线</h1>
+			</div>
+		</div>
+    
+      {
+          groups.map(group => (
+              <div>
+                  <div class="flex flex-row w-full items-center h-[3.75rem] ">
+                      <div class="w-16 transition text-2xl font-bold text-right text-75">{group.year}</div>
+                      <div class="w-20">
+                          <div class="h-3 w-3 bg-none rounded-full outline outline-[var(--dot-color)] mx-auto -outline-offset-[2px] z-50 outline-3"></div>
+                      </div>
+                      <div class="flex-1 transition text-left text-50">{group.posts.length} Posts</div>
+                  </div>
+                  {group.posts.map(post => (
+                      <a href={getPostUrlBySlug(post.slug)}
+                        aria-label={post.data.title}
+                        class="group btn-plain block h-10 w-full rounded-lg hover:text-[initial]"
+                      >
+                          <div class="flex flex-row justify-start items-center h-full">
+                              <!-- date -->
+                              <div class="w-16 transition text-sm text-right text-50">
+                                  {formatDate(post.data.publishDate)}
+                              </div>
+                              <!-- dot and line -->
+                              <div class="w-20 relative dash-line h-full flex items-center">
+                                  <div class="transition-all mx-auto w-0.5 h-0.5 rounded group-hover:h-5
+                                  bg-[var(--dot-color)] group-hover:bg-[var(--dot-color)]
+                                  outline outline-2 z-50
+                                  outline-[var(--dot-color)]"
+                                  ></div>
+                              </div>
+                              <!-- post title -->
+                              <div class="flex-1 text-left font-bold
+                                  group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
+                                  text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
+                              >
+                                      {post.data.title}
+                              </div>
+                              <!-- tag list -->
+                              <div class="hidden md:block text-left text-sm transition
+                              whitespace-nowrap overflow-ellipsis overflow-hidden
+                              text-30"
+                              >{formatTag(post.data.tags)}</div>
+                          </div>
+                      </a>
+                  ))}
+              </div>
+          ))
+      }
+  </div>
+</PageLayout>
+
+<style>
+    @tailwind components;
+    @tailwind utilities;
+
+    @layer components {
+        .dash-line {
+        }
+        .dash-line::before {
+            content: "";
+            @apply w-[10%] h-full absolute -top-1/2 left-[calc(50%_-_1px)] -top-[50%] border-l-[2px]
+            border-dashed pointer-events-none border-[var(--line-color)] transition
+        }
+    }
+</style>

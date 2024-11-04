@@ -1,15 +1,13 @@
 ---
 import PageLayout from '../layouts/BaseLayout.astro'
 import Section from '../components/Section.astro'
-import Card from '../components/Card.astro'
 import Label from '../components/Label.astro'
-import SkillLayout from '../components/SkillLayout.astro'
 import PostPreview from '@/components/post/PostPreview.astro'
 
 import { Icon } from 'astro-icon/components'
-import { getAllPosts, sortMDByDate } from '@/utils'
-import { NAME, ABOUT, POST, CATEGORY, TAG } from '@/consts'
-import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
+import { getAllPosts, getUniqueTags, sortMDByDate } from '@/utils'
+import { NAME, ABOUT, POST, TAG } from '@/consts'
+import Button from '@/components/Button.astro'
 
 const languages = ['lorem', 'ipsum']
 const frontend = ['lorem', 'ipsum', 'lorem', 'ipsum', 'lorem', 'ipsum', 'lorem']
@@ -19,6 +17,7 @@ const others = ['lorem', 'ipsum', 'lorem', 'ipsum', 'lorem']
 const MAX_POSTS = 10
 const allPosts = await getAllPosts()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
+const uniqueTags = getUniqueTags(allPosts)
 ---
 
 <PageLayout meta={{ title: '' }}>
@@ -64,20 +63,30 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			)
 		}
 
-		<Section title={CATEGORY}>
+		{
+			!!languages.length && (
+				<Section title={TAG}>
+					<div>
+						{!!uniqueTags.length && (
+							<ul class='text-bgColor flex flex-wrap gap-2'>
+								{uniqueTags.map((tag) => (
+									<li>
+										<Button title={tag} href={`/tags/${tag}/`} style='pill' />
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
+				</Section>
+			)
+		}
+
+		<!-- <Section title={CATEGORY}>
 			<Card heading='程序员' subheading='搬砖' date='2014 - 2024'>
 				<ul class='ml-4 list-disc text-muted-foreground'>
 					<li>努力写bug中...</li>
 				</ul>
 			</Card>
-		</Section>
-
-		<Section title={TAG}>
-			<SkillLayout title='语言' skills={languages} />
-			<SkillLayout title='前端' skills={frontend} />
-			<SkillLayout title='后端' skills={backend} />
-			<SkillLayout title='移动端' skills={backend} />
-			<SkillLayout title='其他' skills={others} />
-		</Section>
+		</Section> -->
 	</div>
 </PageLayout>
