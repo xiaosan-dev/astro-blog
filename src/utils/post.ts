@@ -39,7 +39,7 @@ export function getUniqueTagsWithCount(
 }
 
 export function getPostUrlBySlug(slug: string): string {
-	return url(`/posts/${slug}/`)
+	return url(`/post/${slug}/`)
 }
 
 export function url(path: string) {
