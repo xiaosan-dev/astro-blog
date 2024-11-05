@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components'
+import Search from '../Search.astro'
 const { title } = Astro.props
 
 const items = [
@@ -20,6 +21,9 @@ const items = [
 		</div>
 
 		<div class='flex flex-row items-center justify-center gap-x-5 sm:gap-x-7'>
+
+			<Search />
+
 			{
 				items.map((item) => (
 					<a href={item.href} class='flex-none text-[1.05rem] font-medium hover:text-foreground/75'>

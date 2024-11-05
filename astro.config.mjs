@@ -9,6 +9,7 @@ import expressiveCode from 'astro-expressive-code'
 import { expressiveCodeOptions } from './src/site.config'
 import icon from 'astro-icon'
 import cloudflare from '@astrojs/cloudflare';
+import pagefind from "astro-pagefind";
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +21,8 @@ export default defineConfig({
 		}),
 		sitemap(),
 		mdx(),
-		icon()
+		icon(),
+		pagefind(),
   ],
   output: 'server',
   adapter: cloudflare({
