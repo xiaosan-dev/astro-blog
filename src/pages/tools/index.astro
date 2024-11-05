@@ -23,7 +23,13 @@ const DEVELOPMENT = [
 		description: 'AI',
 		href: 'https://devv.ai/zh/',
 		iconPath: 'devv'
-	}
+	},
+	{
+		name: 'PixPin',
+		description: '开源免费截图',
+		href: 'https://pixpinapp.com/',
+		iconPath: 'letter-p'
+	},
 ]
 
 const DESIGN = [
@@ -44,7 +50,14 @@ const DOC = [
 	}
 ]
 
-const PRODUCTIVITY = []
+const PRODUCTIVITY = [
+	{
+		name: 'Hello Github',
+		description: '开源Github',
+		href: 'https://hellogithub.com/',
+		iconPath: 'website'
+	},
+]
 ---
 
 <PageLayout meta={{ title: '工具' }}>
@@ -62,7 +75,7 @@ const PRODUCTIVITY = []
 			<ToolSection title='开发' tools={DEVELOPMENT} />
 			<ToolSection title='设计' tools={DESIGN} />
 			<ToolSection title='文档' tools={DOC} />
-			<!-- <ToolSection title='生产力' tools={PRODUCTIVITY} /> -->
+			<ToolSection title='生产力' tools={PRODUCTIVITY} />
 		</div>
 	</div>
 </PageLayout>
