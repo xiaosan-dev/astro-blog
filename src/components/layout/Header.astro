@@ -21,9 +21,7 @@ const items = [
 		</div>
 
 		<div class='flex flex-row items-center justify-center gap-x-5 sm:gap-x-7'>
-
 			<Search />
-
 			{
 				items.map((item) => (
 					<a href={item.href} class='flex-none text-[1.05rem] font-medium hover:text-foreground/75'>
@@ -31,22 +29,21 @@ const items = [
 					</a>
 				))
 			}
-
 			<button
 				id='toggleDarkMode'
 				class='relative rounded-md border border-border p-1.5 transition-all hover:bg-border'
 			>
 				<span class='sr-only'>Dark Theme</span>
 				<Icon
-					width='32'
-					height='32'
-					class='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:hidden dark:-rotate-90 dark:scale-0'
+					width='24'
+					height='24'
+					class='rotate-0 scale-100 transition-all dark:hidden dark:-rotate-90 dark:scale-0'
 					name='sun'
 				/>
 				<Icon
-					width='32'
-					height='32'
-					class='hidden h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:block dark:rotate-0 dark:scale-100'
+					width='24'
+					height='24'
+					class='hidden rotate-90 scale-0 transition-all dark:block dark:rotate-0 dark:scale-100'
 					name='moon'
 				/>
 			</button>
