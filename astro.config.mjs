@@ -8,12 +8,11 @@ import rehypeExternalLinks from 'rehype-external-links'
 import expressiveCode from 'astro-expressive-code'
 import { expressiveCodeOptions } from './src/site.config'
 import icon from 'astro-icon'
-import cloudflare from '@astrojs/cloudflare';
 import pagefind from "astro-pagefind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://https://blog.xiaosan.online/',
   integrations: [
     expressiveCode(expressiveCodeOptions),
     tailwind({
@@ -24,11 +23,20 @@ export default defineConfig({
 		icon(),
 		pagefind(),
   ],
-  output: 'server',
-  adapter: cloudflare({
-	imageService: 'passthrough',
-  }),
+  output: 'static',
+  // adapter: cloudflare({
+	// imageService: 'passthrough',
+  // }),
   markdown: {
+		syntaxHighlight: 'shiki',
+		shikiConfig: {
+			themes: {
+				light: 'github-light',
+				dark: 'github-dark',
+			},
+			wrap: true,
+			langs: ['java', 'html', 'javascript', 'swift', 'typescript', 'shell', 'kotlin'],
+		},
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
 		rehypePlugins: [
 			[
