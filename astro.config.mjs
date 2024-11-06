@@ -35,7 +35,7 @@ export default defineConfig({
 				dark: 'github-dark',
 			},
 			wrap: true,
-			langs: ['java', 'html', 'javascript', 'swift', 'typescript', 'shell', 'kotlin'],
+			langs: ['java', 'html', 'javascript', 'swift', 'typescript', 'shell', 'kotlin', 'groovy'],
 		},
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
 		rehypePlugins: [
