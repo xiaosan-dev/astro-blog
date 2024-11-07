@@ -12,7 +12,7 @@ import pagefind from "astro-pagefind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://https://blog.xiaosan.online/',
+  site: 'https://blog.xiaosan.online/',
   integrations: [
     expressiveCode(expressiveCodeOptions),
     tailwind({
@@ -35,7 +35,7 @@ export default defineConfig({
 				dark: 'github-dark',
 			},
 			wrap: true,
-			langs: ['java', 'html', 'javascript', 'swift', 'typescript', 'shell', 'kotlin', 'groovy'],
+			// langs: ['java', 'html', 'javascript', 'swift', 'typescript', 'shell', 'kotlin', 'groovy'],
 		},
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
 		rehypePlugins: [
