@@ -8,7 +8,7 @@ Features:
 - [x] Search Support 
 - [x] Tag support
 - [ ] Category support
-- [ ] Sitemap support
+- [x] Sitemap support
 - [ ] RSS Feed support
 - [ ] Markdown & MDX support
 
