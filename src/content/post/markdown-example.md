@@ -4,7 +4,6 @@ description: "Markdown 例子"
 publishDate: "2024/10/1"
 updatedDate: 2024/10/1
 tags: ["markdown"]
-ogImage: "/social-card.png"
 ---
 
 ## This is a H2 Heading

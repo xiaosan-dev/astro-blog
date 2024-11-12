@@ -23,17 +23,6 @@ export const siteConfig: SiteConfig = {
 	}
 }
 
-export const menuLinks: Array<{ title: string; path: string }> = [
-	{
-		title: '主页',
-		path: '/'
-	},
-	{
-		title: '博客',
-		path: '/post/'
-	}
-]
-
 // https://expressive-code.com/reference/configuration/
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 	// One dark, one light theme => https://expressive-code.com/guides/themes/#available-themes
