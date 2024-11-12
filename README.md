@@ -9,6 +9,6 @@ Features:
 - [x] Tag support
 - [ ] Category support
 - [x] Sitemap support
-- [ ] RSS Feed support
+- [X] RSS Feed support
 - [ ] Markdown & MDX support
 
