@@ -1,11 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components'
 import Search from '../Search.astro'
+import { url } from '@/utils'
 const { title } = Astro.props
 
 const items = [
-	{ label: '时间线', href: '/timeline' },
-	{ label: '工具', href: '/tools' }
+	{ label: '时间线', href: url('/timeline') },
+	{ label: '工具', href: url('/tools') }
 ]
 ---
 
@@ -15,7 +16,7 @@ const items = [
 		aria-label='global'
 	>
 		<div class='flex flex-row items-center'>
-			<a class='mr-2 flex-none text-xl font-semibold' href='/' aria-label='Brand'>主页</a>
+			<a class='mr-2 flex-none text-xl font-semibold' href={url('/')} aria-label='Brand'>主页</a>
 			{!!title && <Icon width={10} height={10} name='nav-arrow-right' />}
 			<div class='ml-2'>{title}</div>
 		</div>
@@ -29,7 +30,7 @@ const items = [
 					</a>
 				))
 			}
-			<a href='/rss.xml' class='flex-none hover:text-foreground/75'>
+			<a href={url('/rss.xml')} class='flex-none hover:text-foreground/75'>
 				<Icon width={14} height={14} name='rss' />
 			</a>
 			<button

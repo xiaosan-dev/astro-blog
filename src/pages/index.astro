@@ -5,7 +5,7 @@ import Label from '../components/Label.astro'
 import PostPreview from '@/components/post/PostPreview.astro'
 
 import { Icon } from 'astro-icon/components'
-import { getAllPosts, getUniqueTags, sortMDByDate } from '@/utils'
+import { getAllPosts, getUniqueTags, sortMDByDate, url } from '@/utils'
 import { NAME, ABOUT, POST, TAG } from '@/consts'
 import Button from '@/components/Button.astro'
 
@@ -71,7 +71,7 @@ const uniqueTags = getUniqueTags(allPosts)
 							<ul class='text-bgColor flex flex-wrap gap-2'>
 								{uniqueTags.map((tag) => (
 									<li>
-										<Button title={tag} href={`/tags/${tag}/`} style='pill' />
+										<Button title={tag} href={url(`/tags/${tag}/`)} style='pill' />
 									</li>
 								))}
 							</ul>

@@ -12,7 +12,8 @@ import pagefind from "astro-pagefind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://xiaosan-dev.github.io/astro-blog',
+//   site: 'https://xiaosan-dev.github.io',
+  site: 'http://localhost:4321',
   integrations: [
     expressiveCode(expressiveCodeOptions),
     tailwind({
@@ -23,6 +24,7 @@ export default defineConfig({
 		icon(),
 		pagefind(),
   ],
+  base: '/',
   output: 'static',
   markdown: {
 		syntaxHighlight: 'shiki',

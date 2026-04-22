@@ -5,6 +5,7 @@ import '../styles/app.css'
 
 import type { SiteMeta } from '@/types'
 import { siteConfig } from '@/site-config'
+import { url } from '@/utils'
 
 type Props = SiteMeta
 
@@ -26,10 +27,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
 <link href="/manifest.webmanifest" rel="manifest" /> -->
 
-<link rel='apple-touch-icon' sizes='180x180' href='/favicon/apple-touch-icon.png' />
-<link rel='icon' type='image/png' sizes='32x32' href='/favicon/favicon-32x32.png' />
-<link rel='icon' type='image/png' sizes='16x16' href='/favicon/favicon-16x16.png' />
-<link rel='manifest' href='/favicon/site.webmanifest' />
+<link rel='apple-touch-icon' sizes='180x180' href={url('/favicon/apple-touch-icon.png')} />
+<link rel='icon' type='image/png' sizes='32x32' href={url('/favicon/favicon-32x32.png')} />
+<link rel='icon' type='image/png' sizes='16x16' href={url('/favicon/favicon-16x16.png')} />
+<link rel='manifest' href={url('/favicon/site.webmanifest')} />
 
 {/* Font preloads */}
 <!-- <link rel='preload' href='/fonts/Satoshi-Variable.ttf' as='font' type='font/ttf' crossorigin />
@@ -78,9 +79,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 <meta content={description} property='twitter:description' />
 
 {/* Sitemap */}
-<link href='/sitemap-index.xml' rel='sitemap' />
+<link href={url('/sitemap-index.xml')} rel='sitemap' />
 
 {/* RSS auto-discovery */}
-<link href='/rss.xml' rel='alternate' title={siteConfig.title} type='application/rss+xml' />
+<link href={url('/rss.xml')} rel='alternate' title={siteConfig.title} type='application/rss+xml' />
 
 <meta content={Astro.generator} name='generator' />

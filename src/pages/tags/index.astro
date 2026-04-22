@@ -1,7 +1,7 @@
 ---
 import Button from '@/components/Button.astro'
 import PageLayout from '@/layouts/BaseLayout.astro'
-import { getAllPosts, getUniqueTagsWithCount } from '@/utils'
+import { getAllPosts, getUniqueTagsWithCount, url } from '@/utils'
 import { Icon } from 'astro-icon/components'
 
 const allPosts = await getAllPosts()
@@ -15,7 +15,7 @@ const meta = {
 
 <PageLayout meta={meta}>
 	<div class='w-full'>
-		<Button title='返回' href='/post' style='button'>
+		<Button title='返回' href={url('/post')} style='button'>
 			<Icon width='14' height='14' slot='icon-before' name='arrow-left-line' />
 		</Button>
 
@@ -30,7 +30,7 @@ const meta = {
 							<a
 								class='inline-block underline underline-offset-4 hover:text-foreground/75'
 								data-astro-prefetch
-								href={`/tags/${tag}/`}
+								href={url(`/tags/${tag}/`)}
 								title={`查看该标签的帖子: ${tag}`}
 							>
 								&#35;{tag}

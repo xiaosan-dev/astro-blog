@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content'
 import { Image } from 'astro:assets'
 import FormattedDate from '../FormattedDate.astro'
+import { url } from '@/utils'
 
 interface Props {
 	content: CollectionEntry<'post'>
@@ -68,7 +69,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 						aria-label={`View more blogs with the tag ${tag}`}
 						class="inline-block before:content-['#'] hover:underline hover:underline-offset-4"
 						data-pagefind-filter='tag'
-						href={`/tags/${tag}/`}
+						href={url(`/tags/${tag}/`)}
 					>
 						{tag}
 					</a>

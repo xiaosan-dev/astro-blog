@@ -6,7 +6,7 @@
     "dev": "astro check --watch & astro dev",
     "start": "astro dev",
     "build:astro": "astro check && astro build",
-    "build:pagefind": "npx pagefind --site dist",
+    "build:pagefind": "npx pagefind --site dist --output-path dist/pagefind",
     "build": "npm-run-all -s build:astro build:pagefind",
     "preview": "astro preview",
     "astro": "astro",

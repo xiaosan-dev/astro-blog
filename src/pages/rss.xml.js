@@ -13,7 +13,7 @@ export const GET = async () => {
 			title: post.data.title,
 			description: post.data.description,
 			pubDate: post.data.publishDate,
-			link: `/post/${post.slug}`
+			link: `${import.meta.env.BASE_URL}post/${post.slug}/`
 		}))
 	})
 }
