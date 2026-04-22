@@ -2,13 +2,19 @@
 
 用于记录一些日常以及工作中遇到的问题
 
-使用 [Astro](https://docs.astro.build/zh-cn/getting-started/) + [CloudFlare](https://dash.cloudflare.com/) 实现
+使用 [Astro](https://docs.astro.build/zh-cn/getting-started/) + ~~[CloudFlare](https://dash.cloudflare.com/)~~ 实现
 
-Features:
-- [x] Search Support 
+由于域名过期，不想付费，本着免费的原则，直接使用 Github Pages 进行部署
+
+### Issues：
+
+Search 暂时无法使用，待修复
+
+### Features:
+
+- [x] Search Support
 - [x] Tag support
 - [ ] Category support
 - [x] Sitemap support
-- [X] RSS Feed support
+- [x] RSS Feed support
 - [ ] Markdown & MDX support
-
