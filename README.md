@@ -1,4 +1,4 @@
-# [小伞的博客](https://blog.xiaosan.online/)
+# [小伞的博客](https://xiaosan-dev.github.io/astro-blog/)
 
 用于记录一些日常以及工作中遇到的问题
 
