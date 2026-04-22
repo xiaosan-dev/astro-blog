@@ -24,7 +24,7 @@ export default defineConfig({
 		icon(),
 		pagefind(),
   ],
-  base: '/',
+  base: '/astro-blog/',
   output: 'static',
   markdown: {
 		syntaxHighlight: 'shiki',
