@@ -75,7 +75,7 @@ function formatTag(tag: string[]) {
           groups.map(group => (
               <div>
                   <div class="flex flex-row w-full items-center h-[3.75rem] ">
-                      <div class="w-16 transition text-2xl font-bold text-right text-75">{group.year}</div>
+                      <div class="w-16 transition text-2xl font-bold text-right text-75 ">{group.year}</div>
                       <div class="w-20">
                           <div class="h-3 w-3 bg-none rounded-full outline outline-[var(--dot-color)] mx-auto -outline-offset-[2px] z-50 outline-3"></div>
                       </div>
@@ -84,7 +84,7 @@ function formatTag(tag: string[]) {
                   {group.posts.map(post => (
                       <a href={getPostUrlBySlug(post.slug)}
                         aria-label={post.data.title}
-                        class="group btn-plain block h-10 w-full rounded-lg hover:text-[initial]"
+                        class="group btn-plain block h-10 w-full rounded-lg hover:text-muted-foreground"
                       >
                           <div class="flex flex-row justify-start items-center h-full">
                               <!-- date -->
