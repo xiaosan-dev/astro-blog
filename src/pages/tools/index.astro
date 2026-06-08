@@ -188,6 +188,45 @@ const PRODUCTIVITY = [
     iconPath: "snippets-lab",
   },
 ];
+
+const IFS = [
+  {
+    name: "IFS Cloud",
+    description: "IFS 官网",
+    href: "https://www.ifs.com/",
+    iconPath: "ifs",
+  },
+  {
+    name: "IFS Documentation",
+    description: "IFS Cloud 技术文档",
+    href: "https://docs.ifs.com/",
+    iconPath: "ifs",
+  },
+  {
+    name: "IFS Community",
+    description: "IFS 开发者社区",
+    href: "https://community.ifs.com/",
+    iconPath: "ifs",
+  },
+  {
+    name: "IFS Help",
+    description: "IFS 传统版本文档",
+    href: "https://help.ifs.com/",
+    iconPath: "ifs",
+  },
+  {
+    name: "PL/SQL",
+    description: "Oracle PL/SQL 文档",
+    href: "https://docs.oracle.com/en/database/oracle/oracle-database/19/lnpls/",
+    iconPath: "plsql",
+  },
+  {
+    name: "Aurena",
+    description: "IFS 前端框架",
+    href: "https://docs.ifs.com/",
+    iconPath: "aurena",
+  },
+];
 ---
 
 <PageLayout meta={{ title: "工具" }}>
@@ -201,6 +240,7 @@ const PRODUCTIVITY = [
       <ToolSection title="开发" tools={DEVELOPMENT} />
       <ToolSection title="设计" tools={DESIGN} />
       <ToolSection title="文档" tools={DOC} />
+      <ToolSection title="IFS" tools={IFS} />
       <ToolSection title="生产力" tools={PRODUCTIVITY} />
     </div>
   </div>
