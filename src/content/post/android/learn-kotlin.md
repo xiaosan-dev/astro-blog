@@ -3,6 +3,7 @@ title: iOS 开发者学习 Kotlin
 description: "作为iOS开发人员学习Kotlin进行Android开发"
 publishDate: "2024/10/29"
 tags: ["android", "kotlin"]
+category: 'Android'
 ---
 
     对于 iOS 开发者来说，我觉得学习 Android 还是很有必要的。不需要学得多么精通，至少可以看懂程序。

@@ -3,6 +3,7 @@ title: Android String.format 异常
 description: "Android String.format 转换异常"
 publishDate: "2024/10/17"
 tags: ["bug"]
+category: 'Android'
 ---
 
 这是最近修改代码时，发现的bug。

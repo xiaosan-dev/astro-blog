@@ -3,6 +3,7 @@ title: Hexo主题cactus的改修
 description: "Hexo在使用cactus时，自定义其字体"
 publishDate: "2024/10/3"
 tags: ["hexo-theme"]
+category: '博客'
 ---
 
     在使用Hexo中遇到了主题的问题，也遇到了不熟悉Hexo命令等问题，都记录在此。

@@ -3,6 +3,7 @@ title: Android 15 适配
 description: 'Android 15 适配'
 publishDate: '2024/10/22'
 tags: ['Android 15', 'Android', 'Java']
+category: 'Android'
 ---
 
 这里简单分享下我在适配 Android 15 的一些心得。

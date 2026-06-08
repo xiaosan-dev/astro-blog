@@ -5,6 +5,8 @@ export { generateToc } from './generateToc'
 export {
 	getAllPosts,
 	getPostUrlBySlug,
+	getUniqueCategories,
+	getUniqueCategoriesWithCount,
 	getUniqueTags,
 	getUniqueTagsWithCount,
 	sortMDByDate,

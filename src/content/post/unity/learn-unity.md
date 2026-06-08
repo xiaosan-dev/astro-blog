@@ -3,6 +3,7 @@ title: C# 与 Android/iOS 开发的区别：为什么 Unity 更像“游戏世�
 description: "从 Android/iOS 原生开发转向 Unity 时，真正需要改变的并不是 C#，而是游戏开发思维。"
 publishDate: "2026/5/22"
 tags: ["Game", "Unity", "C#"]
+category: 'Unity'
 ---
 
 # C# 与 Android/iOS 开发的区别：为什么 Unity 更像“游戏世界”

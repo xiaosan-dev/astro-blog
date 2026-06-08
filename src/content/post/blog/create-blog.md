@@ -3,6 +3,7 @@ title: 博客的创建
 description: "初创博客的心得记录"
 publishDate: "2024/10/2"
 tags: ["blog"]
+category: '博客'
 ---
 
     这里记录了自己创建博客的一些历程。

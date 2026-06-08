@@ -1,3 +1,39 @@
 ---
+import PageLayout from "@/layouts/BaseLayout.astro";
+import { getAllPosts, getUniqueCategoriesWithCount, url } from "@/utils";
 
+const allPosts = await getAllPosts();
+const allCategories = getUniqueCategoriesWithCount(allPosts);
+
+const meta = {
+  description: "文章分类列表",
+  title: "分类",
+};
 ---
+
+<PageLayout meta={meta}>
+  <div class="w-full">
+    <h1 class="mb-6 mt-1 text-2xl font-bold">分类</h1>
+    {allCategories.length === 0 && <p>暂无分类。</p>}
+
+    {
+      allCategories.length > 0 && (
+        <ul class="flex flex-col gap-y-3">
+          {allCategories.map(([category, count]) => (
+            <li class="flex items-center gap-x-2">
+              <a
+                class="inline-block underline underline-offset-4 hover:text-foreground/75"
+                data-astro-prefetch
+                href={url(`/category/${category}/`)}
+                title={`查看分类「${category}」的文章`}
+              >
+                {category}
+              </a>
+              <span class="inline-block">- {count} 篇</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</PageLayout>

@@ -7,7 +7,7 @@ import Button from "@/components/Button.astro";
 import Pagination from "@/components/Paginator.astro";
 import PostPreview from "@/components/post/PostPreview.astro";
 import PageLayout from "@/layouts/BaseLayout.astro";
-import { getAllPosts, getUniqueTags, sortMDByDate, url } from "@/utils";
+import { getAllPosts, getUniqueCategoriesWithCount, getUniqueTags, sortMDByDate, url } from "@/utils";
 
 export const prerender = true;
 
@@ -15,15 +15,17 @@ export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await getAllPosts();
   const allPostsByDate = sortMDByDate(allPosts);
   const uniqueTags = getUniqueTags(allPosts);
-  return paginate(allPostsByDate, { pageSize: 10, props: { uniqueTags } });
+  const uniqueCategories = getUniqueCategoriesWithCount(allPosts);
+  return paginate(allPostsByDate, { pageSize: 10, props: { uniqueTags, uniqueCategories } });
 }) satisfies GetStaticPaths;
 
 interface Props {
   page: Page<CollectionEntry<"post">>;
   uniqueTags: string[];
+  uniqueCategories: Array<[string, number]>;
 }
 
-const { page, uniqueTags } = Astro.props;
+const { page, uniqueTags, uniqueCategories } = Astro.props;
 
 const paginationProps = {
   ...(page.url.prev && {
@@ -76,7 +78,7 @@ const paginationProps = {
               </ul>
               <span class="mt-4 block sm:text-end">
                 <a
-                  aria-label="View all blog categories"
+                  aria-label="View all tags"
                   class=""
                   href={url("/tags/")}
                   data-astro-prefetch
@@ -86,7 +88,38 @@ const paginationProps = {
               </span>
             </aside>
           )}
-          {/* TODO: categories */}
+          {!!uniqueCategories.length && (
+            <aside class="mt-8">
+              <h2 class="mb-4 flex items-center text-lg font-semibold">
+                <Icon width={20} height={20} name="tag" />
+                分类
+              </h2>
+              <ul class="flex flex-col gap-y-2">
+                {uniqueCategories.map(([category, count]) => (
+                  <li class="flex items-center gap-x-2">
+                    <a
+                      class="inline-block underline underline-offset-4 hover:text-foreground/75"
+                      href={url(`/category/${category}/`)}
+                      data-astro-prefetch
+                    >
+                      {category}
+                    </a>
+                    <span class="text-muted-foreground">({count})</span>
+                  </li>
+                ))}
+              </ul>
+              <span class="mt-4 block sm:text-end">
+                <a
+                  aria-label="View all categories"
+                  class=""
+                  href={url("/category/")}
+                  data-astro-prefetch
+                >
+                  更多 →
+                </a>
+              </span>
+            </aside>
+          )}
         </div>
       )
     }

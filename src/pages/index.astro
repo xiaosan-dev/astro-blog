@@ -2,9 +2,9 @@
 import { Icon } from "astro-icon/components";
 import Button from "@/components/Button.astro";
 import PostPreview from "@/components/post/PostPreview.astro";
-import { ABOUT, NAME, POST, TAG } from "@/consts";
+import { ABOUT, CATEGORY, NAME, POST, TAG } from "@/consts";
 
-import { getAllPosts, getUniqueTags, sortMDByDate, url } from "@/utils";
+import { getAllPosts, getUniqueCategoriesWithCount, getUniqueTags, sortMDByDate, url } from "@/utils";
 import Label from "../components/Label.astro";
 import Section from "../components/Section.astro";
 import PageLayout from "../layouts/BaseLayout.astro";
@@ -13,6 +13,7 @@ const MAX_POSTS = 10;
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 const uniqueTags = getUniqueTags(allPosts);
+const uniqueCategories = getUniqueCategoriesWithCount(allPosts);
 ---
 
 <PageLayout meta={{ title: "" }}>
@@ -75,6 +76,28 @@ const uniqueTags = getUniqueTags(allPosts);
                     href={url(`/tags/${tag}/`)}
                     style="pill"
                   />
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+    </Section>
+
+    <Section title={CATEGORY} path="/category/">
+      <div>
+        {
+          !!uniqueCategories.length && (
+            <ul class="flex flex-col gap-y-2">
+              {uniqueCategories.map(([category, count]) => (
+                <li class="flex items-center gap-x-2">
+                  <a
+                    class="inline-block underline underline-offset-4 hover:text-foreground/75"
+                    href={url(`/category/${category}/`)}
+                  >
+                    {category}
+                  </a>
+                  <span class="text-muted-foreground">({count})</span>
                 </li>
               ))}
             </ul>
