@@ -3,6 +3,7 @@ import BaseHead from "@/components/BaseHead.astro";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
+import { Icon } from "astro-icon/components";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
@@ -25,7 +26,7 @@ const {
     />
   </head>
 
-  <body class="flex flex-row justify-center bg-background">
+  <body class="flex flex-row justify-center bg-background antialiased">
     <ThemeProvider />
     <Header title={title} />
     <main
@@ -34,5 +35,41 @@ const {
       <slot />
       <Footer />
     </main>
+
+    <!-- Floating Back to Top -->
+    <button
+      id="back-to-top"
+      aria-label="Back to Top"
+      class="fixed bottom-8 right-8 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground opacity-0 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl pointer-events-none"
+    >
+      <Icon width={20} height={20} name="arrow-to-up-line" />
+    </button>
+
+    <script>
+      const btn = document.getElementById("back-to-top") as HTMLButtonElement;
+      let ticking = false;
+
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            if (window.scrollY > 300) {
+              btn.style.opacity = "1";
+              btn.style.pointerEvents = "auto";
+            } else {
+              btn.style.opacity = "0";
+              btn.style.pointerEvents = "none";
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      btn.addEventListener("click", () => {
+        window.scrollTo({ top: 0 });
+      });
+    </script>
   </body>
 </html>

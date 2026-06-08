@@ -50,7 +50,7 @@ const paginationProps = {
 
     {
       page.data.length > 0 && (
-        <div class="grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8">
+        <div class="grid gap-y-12 sm:grid-cols-[3fr_1fr] sm:gap-x-8">
           <section aria-label="Blog posts list">
             <ul class="flex flex-col gap-y-4 text-start">
               {page.data.map((p) => (
@@ -59,67 +59,69 @@ const paginationProps = {
             </ul>
             <Pagination {...paginationProps} />
           </section>
-          {!!uniqueTags.length && (
-            <aside>
-              <h2 class="mb-4 flex items-center text-lg font-semibold">
-                <Icon width={20} height={20} name="tag" />
-                标签
-              </h2>
-              <ul class="text-bgColor flex flex-wrap gap-2">
-                {uniqueTags.map((tag) => (
-                  <li>
-                    <Button
-                      title={tag}
-                      href={url(`/tags/${tag}/`)}
-                      style="pill"
-                    />
-                  </li>
-                ))}
-              </ul>
-              <span class="mt-4 block sm:text-end">
-                <a
-                  aria-label="View all tags"
-                  class=""
-                  href={url("/tags/")}
-                  data-astro-prefetch
-                >
-                  更多 →
-                </a>
-              </span>
-            </aside>
-          )}
-          {!!uniqueCategories.length && (
-            <aside class="mt-8">
-              <h2 class="mb-4 flex items-center text-lg font-semibold">
-                <Icon width={20} height={20} name="tag" />
-                分类
-              </h2>
-              <ul class="flex flex-col gap-y-2">
-                {uniqueCategories.map(([category, count]) => (
-                  <li class="flex items-center gap-x-2">
-                    <a
-                      class="inline-block underline underline-offset-4 hover:text-foreground/75"
-                      href={url(`/category/${category}/`)}
-                      data-astro-prefetch
-                    >
-                      {category}
-                    </a>
-                    <span class="text-muted-foreground">({count})</span>
-                  </li>
-                ))}
-              </ul>
-              <span class="mt-4 block sm:text-end">
-                <a
-                  aria-label="View all categories"
-                  class=""
-                  href={url("/category/")}
-                  data-astro-prefetch
-                >
-                  更多 →
-                </a>
-              </span>
-            </aside>
-          )}
+          <aside class="flex flex-col gap-y-6">
+            {!!uniqueTags.length && (
+              <div class="glass-card rounded-xl p-5">
+                <h2 class="mb-4 flex items-center gap-x-2 text-lg font-semibold">
+                  <Icon width={20} height={20} name="tag" />
+                  标签
+                </h2>
+                <ul class="flex flex-wrap gap-2">
+                  {uniqueTags.map((tag) => (
+                    <li>
+                      <Button
+                        title={tag}
+                        href={url(`/tags/${tag}/`)}
+                        style="pill"
+                      />
+                    </li>
+                  ))}
+                </ul>
+                <span class="mt-4 block text-end">
+                  <a
+                    aria-label="View all tags"
+                    class="text-sm text-muted-foreground hover:text-foreground"
+                    href={url("/tags/")}
+                    data-astro-prefetch
+                  >
+                    更多 →
+                  </a>
+                </span>
+              </div>
+            )}
+            {!!uniqueCategories.length && (
+              <div class="glass-card rounded-xl p-5">
+                <h2 class="mb-4 flex items-center gap-x-2 text-lg font-semibold">
+                  <Icon width={20} height={20} name="tag" />
+                  分类
+                </h2>
+                <ul class="flex flex-col gap-y-2">
+                  {uniqueCategories.map(([category, count]) => (
+                    <li class="flex items-center gap-x-2">
+                      <a
+                        class="inline-block underline underline-offset-4 hover:text-foreground/75"
+                        href={url(`/category/${category}/`)}
+                        data-astro-prefetch
+                      >
+                        {category}
+                      </a>
+                      <span class="text-muted-foreground">({count})</span>
+                    </li>
+                  ))}
+                </ul>
+                <span class="mt-4 block text-end">
+                  <a
+                    aria-label="View all categories"
+                    class="text-sm text-muted-foreground hover:text-foreground"
+                    href={url("/category/")}
+                    data-astro-prefetch
+                  >
+                    更多 →
+                  </a>
+                </span>
+              </div>
+            )}
+          </aside>
         </div>
       )
     }

@@ -1,19 +1,17 @@
 ---
 import { Icon } from "astro-icon/components";
+import { siteConfig } from "@/site.config";
 import { url } from "@/utils";
 import Search from "../Search.astro";
 
 const items = [
-  { label: "文章", href: url("/post") },
   { label: "时间线", href: url("/timeline") },
-  { label: "分类", href: url("/category") },
   { label: "工具", href: url("/tools") },
-  { label: "关于", href: url("/about") },
 ];
 ---
 
 <header
-  class="fixed top-0 z-50 flex w-full flex-wrap bg-background sm:flex-nowrap sm:justify-start"
+  class="fixed top-0 z-50 flex w-full flex-wrap bg-[var(--header-bg)] backdrop-blur-md border-b border-border/50 sm:flex-nowrap sm:justify-start"
 >
   <nav
     class="relative mx-auto flex h-14 w-full max-w-[80rem] items-center justify-between px-6 text-sm sm:flex sm:items-center sm:px-10 lg:px-10"
@@ -21,10 +19,13 @@ const items = [
   >
     <div class="flex flex-row items-center">
       <a
-        class="mr-2 flex-none text-xl font-semibold"
+        class="mr-2 flex items-center gap-1.5 text-xl font-semibold"
         href={url("/")}
-        aria-label="Brand">主页</a
+        aria-label="Brand"
       >
+        <Icon width={22} height={22} name="cat" />
+        <span>{siteConfig.title}</span>
+      </a>
     </div>
 
     <div class="flex flex-row items-center justify-center gap-x-5 sm:gap-x-7">
@@ -33,7 +34,7 @@ const items = [
         items.map((item) => (
           <a
             href={item.href}
-            class="flex-none text-[1.05rem] font-medium hover:text-foreground/75"
+            class="nav-link flex-none text-[1.05rem] font-medium hover:text-foreground/75"
           >
             {item.label}
           </a>
@@ -44,7 +45,7 @@ const items = [
       </a>
       <button
         id="toggleDarkMode"
-        class="relative rounded-md border border-border p-1.5 transition-all hover:bg-border"
+        class="relative rounded-full border border-border p-1.5 transition-all hover:bg-border"
       >
         <span class="sr-only">Dark Theme</span>
         <Icon

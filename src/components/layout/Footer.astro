@@ -1,31 +1,37 @@
 ---
 import { Icon } from "astro-icon/components";
+import { siteConfig } from "@/site.config";
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="mx-auto mt-24 w-full">
-  <div class="border-t border-border pt-5">
+  <div class="border-t border-border pt-8 pb-8">
     <div
-      class="flex flex-col items-center gap-y-3 sm:flex sm:flex-row sm:items-center sm:justify-between sm:gap-y-0"
+      class="flex flex-col items-center gap-y-6 sm:flex sm:flex-row sm:items-center sm:justify-between sm:gap-y-0"
     >
-      <div class="flex gap-x-4 text-sm">
-        <p class="">© {year} XiaoSan. All rights reserved.</p>
+      <div class="flex flex-col items-center gap-y-1 sm:items-start">
+        <p class="text-sm font-medium">{siteConfig.title}</p>
+        <p class="text-sm text-muted-foreground">
+          &copy; {year} XiaoSan. All rights reserved.
+        </p>
       </div>
 
-      <div class="flex items-center justify-between">
-        <!-- Social Brands -->
-        <div class="flex items-center gap-x-4">
-          <!-- Github -->
-
-          <a
-            class="inline-block text-muted-foreground transition-all hover:text-muted-foreground/75"
-            href="https://www.github.com/xiaosan-dev"
-          >
-            <Icon width={20} height={20} name="github" />
-          </a>
-        </div>
-        <!-- End Social Brands -->
+      <div class="flex items-center gap-x-5">
+        <a
+          class="text-muted-foreground transition-all hover:text-foreground"
+          href="https://www.github.com/xiaosan-dev"
+          aria-label="GitHub"
+        >
+          <Icon width={20} height={20} name="github" />
+        </a>
+        <a
+          class="text-muted-foreground transition-all hover:text-foreground"
+          href="/rss.xml"
+          aria-label="RSS"
+        >
+          <Icon width={20} height={20} name="rss" />
+        </a>
       </div>
     </div>
   </div>

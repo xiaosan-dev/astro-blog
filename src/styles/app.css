@@ -18,49 +18,55 @@
 
 @layer base {
 	:root {
-		--background: 210 33% 99%;
-		--foreground: 240 10% 3.9%;
+		--background: 0 0% 99%;
+		--foreground: 240 10% 10%;
 		--card: 0 0% 100%;
-		--card-foreground: 240 10% 3.9%;
+		--card-foreground: 240 10% 10%;
 		--popover: 0 0% 100%;
-		--popover-foreground: 240 10% 3.9%;
-		--primary: 240 5.9% 10%;
-		--primary-foreground: 0 0% 98%;
-		--secondary: 240 4.8% 95.9%;
-		--secondary-foreground: 240 5.9% 10%;
-		--muted: 240 4.8% 95.9%;
-		--muted-foreground: 240 3.8% 46.1%;
-		--accent: 240 4.8% 95.9%;
-		--accent-foreground: 240 5.9% 10%;
-		--destructive: 0 72.22% 50.59%;
-		--destructive-foreground: 0 0% 98%;
-		--border: 240 5.9% 90%;
-		--input: 240 5.9% 90%;
-		--ring: 240 5.9% 10%;
+		--popover-foreground: 240 10% 10%;
+		--primary: 174 60% 36%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 174 20% 94%;
+		--secondary-foreground: 240 10% 10%;
+		--muted: 240 5% 92%;
+		--muted-foreground: 240 5% 45%;
+		--accent: 174 60% 36%;
+		--accent-foreground: 0 0% 100%;
+		--destructive: 0 72% 51%;
+		--destructive-foreground: 0 0% 100%;
+		--border: 240 6% 88%;
+		--input: 240 6% 88%;
+		--ring: 174 60% 36%;
 		--radius: 0.5rem;
 		--line-color: rgba(128, 128, 128, 0.2);
-		--dot-color: #2dd4bf;
+		--dot-color: #0d9488;
+		--header-bg: hsla(0, 0%, 99%, 0.85);
+		--link-color: #0d9488;
+		--link-hover: #0f766e;
 	}
 	.dark {
-		--background: 240 10% 3.9%;
-		--foreground: 0 0% 98%;
-		--card: 240 10% 3.9%;
-		--card-foreground: 0 0% 98%;
-		--popover: 240 10% 3.9%;
-		--popover-foreground: 0 0% 98%;
-		--primary: 0 0% 98%;
-		--primary-foreground: 240 5.9% 10%;
-		--secondary: 240 3.7% 15.9%;
-		--secondary-foreground: 0 0% 98%;
-		--muted: 240 3.7% 15.9%;
-		--muted-foreground: 240 5% 64.9%;
-		--accent: 240 3.7% 15.9%;
-		--accent-foreground: 0 0% 98%;
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 0 0% 98%;
-		--border: 240 3.7% 15.9%;
-		--input: 240 3.7% 15.9%;
-		--ring: 240 4.9% 83.9%;
+		--background: 222 47% 8%;
+		--foreground: 210 40% 94%;
+		--card: 222 40% 11%;
+		--card-foreground: 210 40% 94%;
+		--popover: 222 40% 11%;
+		--popover-foreground: 210 40% 94%;
+		--primary: 174 60% 50%;
+		--primary-foreground: 222 47% 8%;
+		--secondary: 217 35% 18%;
+		--secondary-foreground: 210 40% 94%;
+		--muted: 217 35% 18%;
+		--muted-foreground: 215 20% 58%;
+		--accent: 174 60% 50%;
+		--accent-foreground: 222 47% 8%;
+		--destructive: 0 63% 31%;
+		--destructive-foreground: 0 0% 100%;
+		--border: 217 30% 20%;
+		--input: 217 30% 20%;
+		--ring: 174 60% 50%;
+		--header-bg: hsla(222, 47%, 8%, 0.85);
+		--link-color: #2dd4bf;
+		--link-hover: #5eead4;
 	}
 }
 
@@ -70,5 +76,134 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+	::selection {
+		background: hsl(174 60% 36% / 0.2);
+	}
+	.dark ::selection {
+		background: hsl(174 60% 50% / 0.3);
+	}
+}
+
+@layer components {
+	/* 平滑滚动 */
+	html {
+		scroll-behavior: auto;
+	}
+
+	/* 全局链接颜色 */
+	a {
+		color: var(--link-color);
+		transition: color 0.2s ease;
+	}
+	a:hover {
+		color: var(--link-hover);
+	}
+
+	/* 文章正文中的链接 */
+	.prose a {
+		text-decoration: underline;
+		text-underline-offset: 2px;
+		text-decoration-thickness: 1px;
+		transition: all 0.2s ease;
+	}
+	.prose a:hover {
+		text-decoration-thickness: 2px;
+	}
+
+	/* 文章卡片悬停效果 */
+	.post-card {
+		transition: all 0.3s ease;
+	}
+	.post-card:hover {
+		transform: translateX(4px);
+	}
+
+	/* 标签按钮 */
+	.tag-pill {
+		transition: all 0.2s ease;
+	}
+	.tag-pill:hover {
+		background: var(--link-color);
+		color: white;
+		transform: translateY(-1px);
+	}
+
+	/* 导航链接下划线动画 */
+	.nav-link {
+		position: relative;
+	}
+	.nav-link::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background: var(--link-color);
+		transition: width 0.3s ease;
+	}
+	.nav-link:hover::after {
+		width: 100%;
+	}
+
+	/* 渐变文字 */
+	.gradient-text {
+		background: linear-gradient(135deg, #0d9488, #0ea5e9);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	/* 毛玻璃卡片 */
+	.glass-card {
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		background: hsla(0, 0%, 100%, 0.6);
+		border: 1px solid hsla(0, 0%, 100%, 0.3);
+		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+	}
+	.dark .glass-card {
+		background: hsla(222, 47%, 12%, 0.6);
+		border-color: hsla(217, 30%, 24%, 0.5);
+		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+	}
+
+	/* 悬浮提升 */
+	.hover-lift {
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+	.hover-lift:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+	}
+	.dark .hover-lift:hover {
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+	}
+
+	/* 文章正文标题样式 */
+	.prose h1,
+	.prose h2,
+	.prose h3,
+	.prose h4 {
+		scroll-margin-top: 5rem;
+		font-weight: 700;
+		line-height: 1.3;
+	}
+	.prose h1 {
+		margin-top: 2.5rem;
+		margin-bottom: 1rem;
+	}
+	.prose h2 {
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+	}
+	.prose h3 {
+		margin-top: 1.75rem;
+		margin-bottom: 0.5rem;
+	}
+	.prose h4 {
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
 	}
 }

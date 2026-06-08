@@ -15,24 +15,46 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 const postDate = post.data.updatedDate ?? post.data.publishDate;
 ---
 
-<li class="flex flex-col gap-2 sm:flex-row sm:gap-x-4 [&_q]:basis-full">
-  <FormattedDate class="min-w-[120px]" date={postDate} />
+<li>
+  <a
+    data-astro-prefetch
+    href={getPostUrlBySlug(post.id)}
+    class="glass-card hover-lift group flex flex-col gap-y-3 rounded-xl p-5 transition-colors"
+  >
+    <div class="flex items-center gap-x-3 text-xs text-muted-foreground">
+      <FormattedDate date={postDate} />
+      {post.data.minutesRead && (
+        <>
+          <span class="opacity-40">|</span>
+          <span>{post.data.minutesRead}</span>
+        </>
+      )}
+      {post.data.draft && (
+        <span class="ml-auto rounded-full bg-red-500/10 px-2 py-0.5 text-xs text-red-500">
+          Draft
+        </span>
+      )}
+    </div>
 
-  <Tag>
-    {post.data.draft && <span class="text-red-500">(Draft) </span>}
-    <a
-      data-astro-prefetch
-      href={getPostUrlBySlug(post.id)}
-      class="transition-all hover:text-muted-foreground"
-    >
-      {post.data.title}
-    </a>
-    {
-      withDesc && (
-        <p class="line-clamp-3 block text-sm italic text-muted-foreground">
+    <Tag>
+      <h3 class="font-semibold leading-snug transition-colors group-hover:text-primary">
+        {post.data.title}
+      </h3>
+      {withDesc && post.data.description && (
+        <p class="mt-1 line-clamp-2 text-sm text-muted-foreground">
           {post.data.description}
         </p>
-      )
-    }
-  </Tag>
+      )}
+    </Tag>
+
+    {post.data.tags && post.data.tags.length > 0 && (
+      <div class="mt-auto flex flex-wrap gap-1.5 pt-1">
+        {post.data.tags.map((tag: string) => (
+          <span class="rounded-full bg-secondary px-2 py-0.5 text-xs text-muted-foreground">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </a>
 </li>

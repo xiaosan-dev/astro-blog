@@ -1,15 +1,14 @@
 ---
 import { Icon } from "astro-icon/components";
-import Button from "@/components/Button.astro";
-import PostPreview from "@/components/post/PostPreview.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
 import { ABOUT, CATEGORY, NAME, POST, TAG } from "@/consts";
 
-import { getAllPosts, getUniqueCategoriesWithCount, getUniqueTags, sortMDByDate, url } from "@/utils";
+import { getAllPosts, getPostUrlBySlug, getUniqueCategoriesWithCount, getUniqueTags, sortMDByDate, url } from "@/utils";
 import Label from "../components/Label.astro";
 import Section from "../components/Section.astro";
 import PageLayout from "../layouts/BaseLayout.astro";
 
-const MAX_POSTS = 10;
+const MAX_POSTS = 6;
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 const uniqueTags = getUniqueTags(allPosts);
@@ -17,8 +16,18 @@ const uniqueCategories = getUniqueCategoriesWithCount(allPosts);
 ---
 
 <PageLayout meta={{ title: "" }}>
-  <div class="flex w-full flex-col gap-y-10">
-    <section class="flex flex-col items-center gap-y-7">
+  <div class="flex w-full flex-col gap-y-14">
+
+    <!-- Hero Section -->
+    <section class="relative flex flex-col items-center gap-y-7 py-10">
+      <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div
+          class="absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 blur-3xl"
+          style="background: linear-gradient(135deg, hsl(var(--primary)), hsl(198 93% 60%));"
+        >
+        </div>
+      </div>
+
       <Icon width={100} height="auto" name="cat" />
 
       <div class="flex flex-col items-center gap-y-4">
@@ -44,38 +53,86 @@ const uniqueCategories = getUniqueCategoriesWithCount(allPosts);
             </Label>
           </a>
         </div>
+        <p class="mt-2 max-w-md text-center text-sm text-muted-foreground">
+          记录技术成长，分享生活点滴
+        </p>
       </div>
     </section>
 
-    <Section title={ABOUT}>
-      <p class="text-muted-foreground">小伞是一只可爱的小猫！</p>
-    </Section>
+    <!-- Posts Section -->
     {
       allPostsByDate.length > 0 && (
         <Section title={POST} path="/post/">
-          <ul class="flex flex-col gap-y-2">
-            {allPostsByDate.map((p) => (
-              <li class="flex flex-col gap-x-2 sm:flex-row">
-                <PostPreview post={p} />
-              </li>
-            ))}
-          </ul>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {allPostsByDate.map((p) => {
+              const postDate = p.data.updatedDate ?? p.data.publishDate;
+              return (
+                <a
+                  href={getPostUrlBySlug(p.id)}
+                  data-astro-prefetch
+                  class="glass-card hover-lift group flex flex-col gap-y-3 rounded-xl p-5"
+                >
+                  <FormattedDate
+                    class="text-xs text-muted-foreground"
+                    date={postDate}
+                  />
+                  <h3 class="font-semibold leading-snug transition-colors group-hover:text-primary">
+                    {p.data.title}
+                  </h3>
+                  {p.data.description && (
+                    <p class="line-clamp-2 text-sm text-muted-foreground">
+                      {p.data.description}
+                    </p>
+                  )}
+                  {p.data.tags && p.data.tags.length > 0 && (
+                    <div class="mt-auto flex flex-wrap gap-1.5 pt-1">
+                      {p.data.tags.map((tag: string) => (
+                        <span class="rounded-full bg-secondary px-2 py-0.5 text-xs text-muted-foreground">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </a>
+              );
+            })}
+          </div>
         </Section>
       )
     }
 
+    <!-- Categories Section -->
+    <Section title={CATEGORY} path="/category/">
+      <div class="flex flex-wrap gap-x-4 gap-y-1">
+        {
+          !!uniqueCategories.length && uniqueCategories.map(([category, count]) => (
+            <a
+              href={url(`/category/${category}/`)}
+              class="group inline-flex items-center gap-1.5 py-1.5 text-sm transition-colors hover:text-primary"
+            >
+              <span class="inline-block h-1.5 w-1.5 rounded-full bg-primary opacity-60 transition-opacity group-hover:opacity-100" />
+              <span>{category}</span>
+              <span class="text-xs text-muted-foreground">({count})</span>
+            </a>
+          ))
+        }
+      </div>
+    </Section>
+
+    <!-- Tags Section -->
     <Section title={TAG} path="/tags/">
       <div>
         {
           !!uniqueTags.length && (
-            <ul class="text-bgColor flex flex-wrap gap-2">
+            <ul class="flex flex-wrap gap-2">
               {uniqueTags.map((tag) => (
                 <li>
-                  <Button
-                    title={tag}
+                  <a
+                    class="tag-pill inline-block rounded-xl border border-border bg-primary-foreground px-3 py-1 text-sm transition-all"
                     href={url(`/tags/${tag}/`)}
-                    style="pill"
-                  />
+                  >
+                    {tag}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -84,26 +141,11 @@ const uniqueCategories = getUniqueCategoriesWithCount(allPosts);
       </div>
     </Section>
 
-    <Section title={CATEGORY} path="/category/">
-      <div>
-        {
-          !!uniqueCategories.length && (
-            <ul class="flex flex-col gap-y-2">
-              {uniqueCategories.map(([category, count]) => (
-                <li class="flex items-center gap-x-2">
-                  <a
-                    class="inline-block underline underline-offset-4 hover:text-foreground/75"
-                    href={url(`/category/${category}/`)}
-                  >
-                    {category}
-                  </a>
-                  <span class="text-muted-foreground">({count})</span>
-                </li>
-              ))}
-            </ul>
-          )
-        }
-      </div>
+    <!-- About Section -->
+    <Section title={ABOUT} path="/about/">
+      <p class="leading-relaxed text-muted-foreground">
+        小伞是一只可爱的小猫！热爱技术，热爱生活，在代码的世界里探索无限可能。
+      </p>
     </Section>
   </div>
 </PageLayout>
