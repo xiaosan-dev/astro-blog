@@ -1,0 +1,85 @@
+---
+import { Icon } from "astro-icon/components";
+import Label from "@/components/Label.astro";
+import PageLayout from "@/layouts/BaseLayout.astro";
+import { NAME } from "@/consts";
+
+const meta = {
+  description: `关于${NAME}`,
+  title: "关于",
+};
+---
+
+<PageLayout meta={meta}>
+  <div class="flex w-full flex-col gap-y-10">
+    <section class="flex flex-col items-center gap-y-7">
+      <Icon width={100} height="auto" name="cat" />
+
+      <div class="flex flex-col items-center gap-y-4">
+        <h1 class="text-3xl font-bold">{NAME}</h1>
+        <div class="flex flex-wrap justify-center gap-x-7 gap-y-3">
+          <Label title="软件开发者">
+            <Icon width={20} height={20} name="bug" />
+          </Label>
+          <Label title="中国">
+            <Icon width={20} height={20} name="location" />
+          </Label>
+          <a
+            class="inline-block transition-all hover:text-muted-foreground/75"
+            href="https://www.github.com/xiaosan-dev"
+          >
+            <Label
+              title="Github"
+              as="div"
+              href="https://github.com/xiaosan-dev"
+              target="_blank"
+            >
+              <Icon width={20} height={20} name="github" />
+            </Label>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-y-6">
+      <h2 class="text-2xl font-bold">关于我</h2>
+      <div class="flex flex-col gap-y-4 text-muted-foreground">
+        <p>你好，我是小伞，一名软件开发者。</p>
+        <p>
+          这里是我的个人博客，记录开发过程中遇到的问题、学习笔记，以及一些生活中的想法。
+        </p>
+        <p>
+          主要关注 Android 开发、游戏开发（Unity）等领域。
+          如果你对我的文章有任何想法或建议，欢迎通过 GitHub 与我交流。
+        </p>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-y-6">
+      <h2 class="text-2xl font-bold">技能</h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="rounded-full border border-border px-3 py-1 text-sm">Android</span>
+        <span class="rounded-full border border-border px-3 py-1 text-sm">Kotlin</span>
+        <span class="rounded-full border border-border px-3 py-1 text-sm">Java</span>
+        <span class="rounded-full border border-border px-3 py-1 text-sm">Unity</span>
+        <span class="rounded-full border border-border px-3 py-1 text-sm">C#</span>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-y-6">
+      <h2 class="text-2xl font-bold">联系方式</h2>
+      <div class="flex flex-col gap-y-3 text-muted-foreground">
+        <div class="flex items-center gap-x-2">
+          <Icon width={20} height={20} name="github" />
+          <a
+            class="underline underline-offset-4 hover:text-foreground/75"
+            href="https://github.com/xiaosan-dev"
+            target="_blank"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</PageLayout>
